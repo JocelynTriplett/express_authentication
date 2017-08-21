@@ -34,31 +34,40 @@ function authenticate(req,username,password){
     return x.username === username;
   });
   if (user.password === password) {
-    console.log ("yay! password is right!")
+    console.log ("yay! password is right!");
+    // console.log(req.session);
+    function randomNumber(min, max) {
+      let random =  Math.random() * (max - min) + min;
+      req.session.cookie.id = random;
+      console.log(req.session.cookie.id);
+      console.log(req.session);
+    }
+    randomNumber(1, 101);
+
   }
   else {
     console.log ("nope, password is wrong.")
   }
-    // console.log("Is this the right user?: "+user.username);
+  // console.log("Is this the right user?: "+user.username);
 };
 
 
 
 
- // for (var i = 0; i < users.users.length; i++) {
- //   if (users.users[i].username === username && users.users[i].password === password) {
- //     console.log("AUTHENTICATED!!");
- //   }
- //   else {
- //     console.log("None of them matched!");
- //   }
- // }
+// for (var i = 0; i < users.users.length; i++) {
+//   if (users.users[i].username === username && users.users[i].password === password) {
+//     console.log("AUTHENTICATED!!");
+//   }
+//   else {
+//     console.log("None of them matched!");
+//   }
+// }
 // }
 // GET/POST
 
 app.get('/',function(req,res){
- //res.send("Hello world!");
- res.render('index')
+  //res.send("Hello world!");
+  res.render('index')
 });
 
 app.post('/', function(req, res){
@@ -68,6 +77,7 @@ app.post('/', function(req, res){
   console.log(username);
   console.log(password);
   authenticate(req,username,password);
+  //console.log(req.session);
   // console.log(users);
   // console.log(users.users[0]);
 });
