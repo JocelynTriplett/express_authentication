@@ -3,11 +3,11 @@
 module.exports = {
   users: [
     {
-      username: "Ed",
+      username: "edward.triplett@gmail.com",
       password: "rabbit"
     },
     {
-      username: "Jocelyn",
+      username: "jocelyn.triplett@gmail.com",
       password: "alfie"
     }
   ]
