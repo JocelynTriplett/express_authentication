@@ -30,23 +30,26 @@ app.use(session({
 // }
 
 function authenticate(req,username,password){
-  user = users.users.find(function(x){
+  if (user = users.users.find(function(x){
     return x.username === username;
-  });
+  })) {
   if (user.password === password) {
     console.log ("yay! password is right!");
     // console.log(req.session);
     function randomNumber(min, max) {
       let random =  Math.random() * (max - min) + min;
       req.session.cookie.id = random;
-      console.log(req.session.cookie.id);
-      console.log(req.session);
+      // console.log(req.session.cookie.id);
+      // console.log(req.session);
     }
     randomNumber(1, 101);
 
   }
   else {
     console.log ("nope, password is wrong.")
+  }}
+  else {
+    console.log("sorry, username not found.")
   }
   // console.log("Is this the right user?: "+user.username);
 };
@@ -71,15 +74,21 @@ app.get('/',function(req,res){
 });
 
 app.post('/', function(req, res){
-  console.log(req.body);
+  //console.log(req.body);
   var username = req.body.username;
   var password = req.body.password;
-  console.log(username);
-  console.log(password);
+  //console.log(username);
+  //console.log(password);
   authenticate(req,username,password);
   //console.log(req.session);
   // console.log(users);
   // console.log(users.users[0]);
+  if (req.session.cookie.id) {
+    res.render('yay', {username})
+  }
+  else {
+    res.render('uhoh');
+  }
 });
 
 
