@@ -33,7 +33,13 @@ function authenticate(req,username,password){
   user = users.users.find(function(x){
     return x.username === username;
   });
-    console.log("Is this the right user?: "+user.username);
+  if (user.password === password) {
+    console.log ("yay! password is right!")
+  }
+  else {
+    console.log ("nope, password is wrong.")
+  }
+    // console.log("Is this the right user?: "+user.username);
 };
 
 
